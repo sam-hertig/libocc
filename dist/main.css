@@ -1,0 +1,20 @@
+#viz {
+    font-family: Arial, Helvetica, sans-serif;
+    max-width: 643px;
+}
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    max-width: 643px;
+    padding-bottom: 194%;
+    vertical-align: top;
+}
+
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
