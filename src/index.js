@@ -2,7 +2,7 @@ import * as d3 from "d3";
 
 const url = 'http://iz-websrv01.ethz.ch:3000/api/visitors';
 
-console.log("yoya");
+console.log("yay");
 
 
 fetch(url)
