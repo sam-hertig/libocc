@@ -48,9 +48,8 @@ const freeGradient = `<radialGradient id="b" cx="56.693" cy="56.693" r="51.216" 
 
 // Floor labels
 const labelG = "";
-
-
-
+const labelH = "";
+const labelJ = "";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -92,8 +91,8 @@ const plot = data => {
 
     // Plot floors individually
     plotFloor(labelG, data.G, data.G_max, 0);
-    plotFloor(labelG, data.H, data.H_max, 1);
-    plotFloor(labelG, data.J, data.J_max, 2);
+    plotFloor(labelH, data.H, data.H_max, 1);
+    plotFloor(labelJ, data.J, data.J_max, 2);
 
 }
 
