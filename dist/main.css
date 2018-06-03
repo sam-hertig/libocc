@@ -1,14 +1,14 @@
 #viz {
     font-family: Arial, Helvetica, sans-serif;
-    max-width: 643px;
+    max-width: 600px;
 }
 
 .svg-container {
     display: inline-block;
     position: relative;
     width: 100%;
-    max-width: 643px;
-    padding-bottom: 194%;
+    max-width: 600px;
+    /*padding-bottom: 100%;*/
     vertical-align: top;
 }
 
