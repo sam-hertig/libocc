@@ -70,10 +70,10 @@ const update = () => {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            // if (!data.library_is_closed) {
+            // if (data.library_is_closed) {
+            // else if (!data.no_data) {
+            // else
             plot(data);
-
-
         }).catch(e => {
             console.log("Couldn't fetch library data from server;", e);
         });
