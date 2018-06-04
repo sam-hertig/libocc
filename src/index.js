@@ -60,8 +60,7 @@ const viz = d3.select("#viz")
     .append("svg")
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "0 0 " + width + " " + height)
-    .classed("svg-content-responsive", true)
-    .on("click", () => update())   
+    .classed("svg-content-responsive", true) 
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -74,10 +73,27 @@ const update = () => {
             // else if (!data.no_data) {
             // else
             plot(data);
+            refreshTimestamp(data.ts);
+
         }).catch(e => {
             console.log("Couldn't fetch library data from server;", e);
         });
 }
+
+// Update timestamp and insert refresh link
+const refreshTimestamp = ts => {
+    const formatTime = d3.timeFormat("%H:%M, %B %d, %Y");
+    const timeStamp = formatTime(new Date(ts));
+    viz.selectAll(".ts").remove();
+    viz
+        .append("g")
+        .attr("class", "ts")
+        .append("text")
+        .html("&#x21bb; &nbsp;" + timeStamp)
+        .attr("text-anchor", "middle")
+        .attr("transform", "translate(" + (140) + "," + (height-25) + ")")        
+        .on("click", () => update()); 
+};
 
 // Plot data
 const plot = data => {
@@ -90,9 +106,9 @@ const plot = data => {
     data.J = Math.round(Math.random()*data.J_max);
 
     // Plot floors individually
-    plotFloor(labelG, data.G, data.G_max, 0);
-    plotFloor(labelH, data.H, data.H_max, 1);
-    plotFloor(labelJ, data.J, data.J_max, 2);
+    plotFloor(labelG, Math.round(data.G), data.G_max, 0);
+    plotFloor(labelH, Math.round(data.H), data.H_max, 1);
+    plotFloor(labelJ, Math.round(data.J), data.J_max, 2);
 
 }
 

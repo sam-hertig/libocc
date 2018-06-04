@@ -1,6 +1,17 @@
-#viz {
+body {
     font-family: Arial, Helvetica, sans-serif;
+}
+
+#viz {
     max-width: 400px;
+}
+
+.ts {
+    fill: #0069b4;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 0.75rem;
+    /*line-height: 1.1666666667;*/
 }
 
 .svg-container {
@@ -8,6 +19,8 @@
     position: relative;
     width: 100%;
     max-width: 400px;
+/*    height: 100%;
+    max-height: 400px;*/
     /*padding-bottom: 100%;*/
     vertical-align: top;
 }
@@ -22,3 +35,5 @@
 .person, .gradient {
     transition: opacity 2s;
 }
+
+
