@@ -22,11 +22,11 @@ body {
     fill: #0069b4;
     font-weight: bold;
     cursor: pointer;
-    font-size: 10pt;
+    font-size: 20pt;
 }
 
 .floor-label {
-    font-size: 11pt;
+    font-size: 20pt;
     fill: #AAAAAA;
 }
 

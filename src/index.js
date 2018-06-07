@@ -4,7 +4,7 @@ import * as d3 from "d3";
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
 
 // Define dimensions
-const maxWidth = 400;
+const maxWidth = 800;
 const maxHeight = maxWidth;
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 const width = maxWidth - margin.left - margin.right;
@@ -14,11 +14,11 @@ const height = maxHeight - margin.top - margin.bottom;
 const nrOfDesksPerIcons = 5;
 const iconScale = maxWidth/1000;
 const gradientOpacity = 0.5;
-const iconHorSpace = 40;
+const iconHorSpace = maxWidth/10;
 const iconVerSpace = iconHorSpace;
-const floorVerSpace = 100;
-const bezelLeft = 40;
-const bezelBottom = 120;
+const floorVerSpace = maxWidth/4;
+const bezelLeft = maxWidth/10;
+const bezelBottom = 0.3*maxWidth;
 
 // Icons and paths
 const deskHtml = `<path fill="#B7B7B8" d="M95.693 52.409h-78v9h10v34.5h9v-34.5h40v34.5h9v-34.5h10z"/>`
@@ -105,12 +105,13 @@ const refreshTimestamp = (ts, trend) => {
         }
     }
 
+    // dont't use glyphs, use custom svgs!!! TO DO
 
     viz.selectAll(".ts").remove();
     viz
         .append("g")
         .attr("class", "ts")
-        .attr("transform", "translate(" + ((width/2)-margin.left) + "," + (height-25) + ")")        
+        .attr("transform", "translate(" + ((width/2)-margin.left) + "," + (height-(bezelBottom/3)) + ")")        
         .append("text")
         .html("&#x21bb; &nbsp;" + timeStamp + "; &nbsp;Trend: " + getTrendArrow(trend))
         // .text("A")
