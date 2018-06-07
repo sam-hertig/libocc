@@ -5,19 +5,20 @@ const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
 
 // Define dimensions
 const maxWidth = 400;
-const maxHeight = 400;
+const maxHeight = maxWidth;
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 const width = maxWidth - margin.left - margin.right;
 const height = maxHeight - margin.top - margin.bottom;
 
 // Define size and spacings of icons
 const nrOfDesksPerIcons = 5;
-const iconScale = 0.4;
+const iconScale = maxWidth/1000;
 const gradientOpacity = 0.5;
 const iconHorSpace = 40;
-const iconVerSpace = 40;
-const floorVerSpace = 120;
-const offsetBottom = 80;
+const iconVerSpace = iconHorSpace;
+const floorVerSpace = 100;
+const bezelLeft = 40;
+const bezelBottom = 120;
 
 // Icons and paths
 const deskHtml = `<path fill="#B7B7B8" d="M95.693 52.409h-78v9h10v34.5h9v-34.5h40v34.5h9v-34.5h10z"/>`
@@ -47,14 +48,15 @@ const freeGradient = `<radialGradient id="b" cx="56.693" cy="56.693" r="51.216" 
                       <circle fill="url(#b)" cx="56.693" cy="56.693" r="51.216"/>`
 
 // Floor labels
-const labelG = "";
-const labelH = "";
-const labelJ = "";
+const labelG = "Floor G";
+const labelH = "Floor H";
+const labelJ = "Floor J";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Create base SVG
 const viz = d3.select("#viz")
+    .style("max-width", maxWidth+"px")
     .append("div")
     .classed("svg-container", true)
     .append("svg")
@@ -72,8 +74,16 @@ const update = () => {
             // if (data.library_is_closed) {
             // else if (!data.no_data) {
             // else
+
+
+            // Randomize data for testing
+            data.G = Math.round(Math.random()*data.G_max);
+            data.H = Math.round(Math.random()*data.H_max);
+            data.J = Math.round(Math.random()*data.J_max);
+            data.trend = Math.round((Math.random()*2)-1);
+
             plot(data);
-            refreshTimestamp(data.ts);
+            refreshTimestamp(data.ts, data.trend);
 
         }).catch(e => {
             console.log("Couldn't fetch library data from server;", e);
@@ -81,29 +91,37 @@ const update = () => {
 }
 
 // Update timestamp and insert refresh link
-const refreshTimestamp = ts => {
+const refreshTimestamp = (ts, trend) => {
     const formatTime = d3.timeFormat("%H:%M, %B %d, %Y");
     const timeStamp = formatTime(new Date(ts));
+    const getTrendArrow = trend => {
+        console.log(trend);
+        if (trend === 1) {
+            return "&#x2197"; //&#x21D7  &#x2197   &#x21E7
+        } else if (trend === -1) {
+            return "&#x2198";
+        } else {
+            return "&#x2192";
+        }
+    }
+
+
     viz.selectAll(".ts").remove();
     viz
         .append("g")
         .attr("class", "ts")
+        .attr("transform", "translate(" + ((width/2)-margin.left) + "," + (height-25) + ")")        
         .append("text")
-        .html("&#x21bb; &nbsp;" + timeStamp)
+        .html("&#x21bb; &nbsp;" + timeStamp + "; &nbsp;Trend: " + getTrendArrow(trend))
+        // .text("A")
         .attr("text-anchor", "middle")
-        .attr("transform", "translate(" + (140) + "," + (height-25) + ")")        
-        .on("click", () => update()); 
+        .on("click", () => update());
 };
 
 // Plot data
 const plot = data => {
 
     console.log(data);
-
-    // Randomize occupancy for testing
-    data.G = Math.round(Math.random()*data.G_max);
-    data.H = Math.round(Math.random()*data.H_max);
-    data.J = Math.round(Math.random()*data.J_max);
 
     // Plot floors individually
     plotFloor(labelG, Math.round(data.G), data.G_max, 0);
@@ -115,11 +133,6 @@ const plot = data => {
 // Plot single floor data
 const plotFloor = (label, count, max, level) => {
 
-    // Place label
-
-    //TO DO
-
-
     // Generate data with coordinates
     const horMaxNrofIcons = Math.round(max/10);
     const nrOfdesks = horMaxNrofIcons*10;
@@ -128,9 +141,9 @@ const plotFloor = (label, count, max, level) => {
     for (let i = 0; i<nrOfIcons; i++) {
         const rowNr = Math.floor(i/horMaxNrofIcons);
         data.push({
-            x: i*iconHorSpace-(rowNr*horMaxNrofIcons*iconHorSpace),
-            y: height - offsetBottom - (rowNr*iconVerSpace) - (level*floorVerSpace),
-            occ: (i*nrOfDesksPerIcons)<count 
+            x: bezelLeft + (i*iconHorSpace) - (rowNr*horMaxNrofIcons*iconHorSpace),
+            y: height - bezelBottom - (rowNr*iconVerSpace) - (level*floorVerSpace),
+            occ: (i*nrOfDesksPerIcons)<count
         });
     }
 
@@ -216,6 +229,17 @@ const plotFloor = (label, count, max, level) => {
     // Remove people if necessary
     people.exit().remove();
 
+    // Place floor label
+    const labelYPos = height - bezelBottom - (level*floorVerSpace);
+    const floorLabelName = "floor-" + level + "-label";
+    viz.selectAll("." + floorLabelName).remove();
+    viz
+        .append("text")
+        .attr("transform", "translate(" + 0 + "," + labelYPos + ")")
+        .attr("class", "floor-label " + floorLabelName)
+        .attr("dy", "0.8rem")
+        .attr("dx", "-0.8rem")
+        .text(label);    
 }
 
 // Initialize and then update every minute
