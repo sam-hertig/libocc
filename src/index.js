@@ -4,7 +4,7 @@ import * as d3 from "d3";
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
 
 // Define dimensions
-const maxWidth = 800;
+const maxWidth = 500;
 const maxHeight = maxWidth;
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 const width = maxWidth - margin.left - margin.right;
@@ -18,7 +18,7 @@ const iconHorSpace = maxWidth/10;
 const iconVerSpace = iconHorSpace;
 const floorVerSpace = maxWidth/4;
 const bezelLeft = maxWidth/10;
-const bezelBottom = 0.3*maxWidth;
+const bezelBottom = 0.35*maxWidth;
 
 // Icons and paths
 const deskHtml = `<path fill="#B7B7B8" d="M95.693 52.409h-78v9h10v34.5h9v-34.5h40v34.5h9v-34.5h10z"/>`
@@ -91,32 +91,22 @@ const update = () => {
 }
 
 // Update timestamp and insert refresh link
+
 const refreshTimestamp = (ts, trend) => {
+
     const formatTime = d3.timeFormat("%H:%M, %B %d, %Y");
     const timeStamp = formatTime(new Date(ts));
-    const getTrendArrow = trend => {
-        console.log(trend);
-        if (trend === 1) {
-            return "&#x2197"; //&#x21D7  &#x2197   &#x21E7
-        } else if (trend === -1) {
-            return "&#x2198";
-        } else {
-            return "&#x2192";
-        }
-    }
-
-    // dont't use glyphs, use custom svgs!!! TO DO
-
+    
     viz.selectAll(".ts").remove();
     viz
         .append("g")
         .attr("class", "ts")
-        .attr("transform", "translate(" + ((width/2)-margin.left) + "," + (height-(bezelBottom/3)) + ")")        
+        .attr("transform", "translate(" + ((width/2)-margin.left) + "," + (height-(0.4*bezelBottom)) + ")")        
         .append("text")
-        .html("&#x21bb; &nbsp;" + timeStamp + "; &nbsp;Trend: " + getTrendArrow(trend))
-        // .text("A")
+        .html("&#x21bb; &nbsp;" + timeStamp)
         .attr("text-anchor", "middle")
         .on("click", () => update());
+
 };
 
 // Plot data
@@ -231,16 +221,17 @@ const plotFloor = (label, count, max, level) => {
     people.exit().remove();
 
     // Place floor label
-    const labelYPos = height - bezelBottom - (level*floorVerSpace);
+    const labelYPos = height - 0.94*bezelBottom - (level*floorVerSpace);
     const floorLabelName = "floor-" + level + "-label";
     viz.selectAll("." + floorLabelName).remove();
     viz
         .append("text")
         .attr("transform", "translate(" + 0 + "," + labelYPos + ")")
         .attr("class", "floor-label " + floorLabelName)
-        .attr("dy", "0.8rem")
-        .attr("dx", "-0.8rem")
-        .text(label);    
+        .attr("dy", "0.35em")
+        .attr("dx", -0.5*margin.left)
+        .text(label);   
+
 }
 
 // Initialize and then update every minute
