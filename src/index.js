@@ -73,20 +73,24 @@ const update = () => {
         .then(data => {
             // if (data.library_is_closed) {
             // else if (!data.no_data) {
-            // else
-
-
-            // Randomize data for testing
+            console.log("Obtained library data from server");
+            plot(data);
+            refreshTimestamp(data.ts, data.trend);
+        }).catch(e => {
+            console.log("Couldn't fetch library data from server;", e);
+            // Generate dummy data for testing
+            const data = {
+                G_max: 68,
+                H_max: 68,
+                J_max: 40,
+                trend: Math.round((Math.random()*2)-1),
+                ts: new Date().toString()
+            }
             data.G = Math.round(Math.random()*data.G_max);
             data.H = Math.round(Math.random()*data.H_max);
             data.J = Math.round(Math.random()*data.J_max);
-            data.trend = Math.round((Math.random()*2)-1);
-
-            plot(data);
+            plot(data);  
             refreshTimestamp(data.ts, data.trend);
-
-        }).catch(e => {
-            console.log("Couldn't fetch library data from server;", e);
         });
 }
 
