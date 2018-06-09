@@ -14,10 +14,12 @@
     left: 0;
 }
 
-.person {
-    transition: opacity 2s;
+#sittingPeopleG > g,
+#sittingPeopleH > g,
+#sittingPeopleJ > g {
+    transition: opacity 1s;
 }
 
-.ts {
+#text-ts {
     cursor: pointer;
 }
