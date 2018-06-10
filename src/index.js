@@ -6,6 +6,8 @@ const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
 // Debug (mock API and generate dummy data)
 const debugMode = true;
 
+let timer;
+
 // Main function
 const update = () => {
 
@@ -13,7 +15,8 @@ const update = () => {
         refreshFloorOccupancy("sittingPeopleG", data.G, data.G_max);
         refreshFloorOccupancy("sittingPeopleH", data.H, data.H_max);
         refreshFloorOccupancy("sittingPeopleJ", data.J, data.J_max);
-        refreshTimestamp(data.ts);        
+        refreshTimestamp(data.ts);
+        visualizeTrend(data.trend)        
     }
 
     if (!debugMode) {
@@ -41,6 +44,40 @@ const update = () => {
     }
 
 }
+
+const visualizeTrend = trend => {
+
+    d3
+        .selectAll("#walkingPeople")
+        .attr("opacity", 0); 
+
+    if (timer) {
+        timer.stop();
+    }
+
+    if (trend === 0) {
+        return;
+    }
+
+    const targetY = trend === 1 ? 470 : 615; 
+    const originY = trend === 1 ? 615 : 470; 
+    const transtitionTime = 5000;
+
+    const movePerson = () => {
+        d3
+            .selectAll("#walkingPeople")
+            .attr("transform", "translate(73," + originY + ")")
+            .attr("opacity", 1)
+            .transition()
+            .duration(transtitionTime-100)
+            .attr("transform", "translate(73," + targetY + ")")
+            .attr("opacity", 0);
+    }
+    
+    movePerson();
+    timer = d3.interval(movePerson, transtitionTime);
+}
+
 
 // Update timestamp and insert refresh link
 const refreshTimestamp = (ts) => {
