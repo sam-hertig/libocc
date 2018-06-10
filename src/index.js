@@ -5,19 +5,46 @@ const debugMode = true; // mock API and generate dummy data
 const nrOfPeoplePerDesk = 5;
 let timer;
 
+
+const showUpdating = () => {
+    d3
+        .selectAll("#ts > *")
+        .text("updating...")
+        .attr("class", "flashy")
+        .attr("dx", -12)
+        .on("click", () => update());
+}
+
+const showError = () => {
+    d3
+        .selectAll("#ts > *")
+        .text("no data")
+        .attr("class", "")
+        .attr("dx", -12)
+        .on("click", () => update());
+}
+
+const processData = data => {
+    console.log(data);
+    if (data.no_data) {
+        showError();
+        return;
+    }
+    refreshTimestamp(data.ts);
+    refreshFloorOccupancy("sittingPeopleG", data.G, data.G_max);
+    refreshFloorOccupancy("sittingPeopleH", data.H, data.H_max);
+    refreshFloorOccupancy("sittingPeopleJ", data.J, data.J_max);
+    visualizeTrend(data.trend);
+    libIsClosed(data.library_is_closed);
+    // !data.no_data) 
+}
+
 // Main function
 const update = () => {
 
-    const processData = data => {
-        console.log(data);
-        refreshTimestamp(data.ts);
-        refreshFloorOccupancy("sittingPeopleG", data.G, data.G_max);
-        refreshFloorOccupancy("sittingPeopleH", data.H, data.H_max);
-        refreshFloorOccupancy("sittingPeopleJ", data.J, data.J_max);
-        visualizeTrend(data.trend);
-        libIsClosed(data.library_is_closed);
-        // !data.no_data) 
-    }
+    showUpdating();
+
+
 
     if (!debugMode) {
         fetch(url)
@@ -25,6 +52,7 @@ const update = () => {
             .then(data => {
                 processData(data);
             }).catch(e => {
+                showError();
                 console.log("Couldn't fetch library data from server |", e);
             });        
     } else {
@@ -44,6 +72,7 @@ const update = () => {
 
 }
 
+
 const libIsClosed = closed => {
     d3
         .selectAll("#closed > #icon")
@@ -53,15 +82,15 @@ const libIsClosed = closed => {
         d3
             .selectAll("#ts > *")
             .text("closed")
+            .attr("class", "")
             .attr("dx", -5);            
     } else {
         d3
             .selectAll("#ts > *")
+            .attr("class", "")
             .attr("dx", 0);         
     }
 };
-
-
 
 
 const visualizeTrend = trend => {
@@ -119,8 +148,11 @@ const refreshTimestamp = (ts) => {
     d3
         .selectAll("#ts > *")
         .text(timeStamp)
+        .attr("dx", 0)
+        .attr("class", "")
         .on("click", () => update());
 };
+
 
 // Refresh occupancy for a single floor
 const refreshFloorOccupancy = (id, count, count_max) => {

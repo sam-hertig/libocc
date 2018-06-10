@@ -17,13 +17,13 @@
 #sittingPeopleG > g,
 #sittingPeopleH > g,
 #sittingPeopleJ > g {
-    transition: opacity 1s;
+    transition: opacity 2s;
 }
 
 #text-ts {
     cursor: pointer;
 }
 
-/*#walkingPeople {
-    transition: transform 2s;
-}*/
+.flashy {
+    font-size: 20px;
+}
