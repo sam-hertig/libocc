@@ -34,7 +34,7 @@ const update = () => {
             J_max: 40,
             trend: Math.round((Math.random()*2)-1),
             ts: new Date().toString(),
-            library_is_closed: Math.random() > 0.5
+            library_is_closed: Math.random() > 0.7
         }
         data.G = Math.round(Math.random()*data.G_max);
         data.H = Math.round(Math.random()*data.H_max);
@@ -49,13 +49,7 @@ const libIsClosed = closed => {
         .selectAll("#closed > #icon")
         .attr("opacity", closed ? 1 : 0);
     if (closed) {
-        if (timer) {
-            timer.stop();
-        }     
-        d3
-            .selectAll("#walkingPerson")
-            .interrupt()            
-            .attr("opacity", 0);
+        visualizeTrend(0);
         d3
             .selectAll("#ts > *")
             .text("closed")
@@ -78,30 +72,38 @@ const visualizeTrend = trend => {
 
     d3
         .selectAll("#walkingPerson")
+        .interrupt()  
         .attr("opacity", 0);     
 
     if (trend === 0) {
         return;
     }
 
-    const targetX = trend === 1 ? 150 : 24; 
-    const originX = trend === 1 ? 24 : 150; 
+    const target = {
+        x: trend === 1 ? 150 : 24,
+        y: 499,
+        scale: trend === 1 ? 1 : 2
+    };
+    const origin = {
+        x: trend === 1 ? 24 : 150,
+        y: 499,
+        scale: trend === 1 ? 2 : 1
+    };
     const transtitionTime = 4000;
 
     const move = () => {
         d3
             .selectAll("#walkingPerson")
-            .attr("transform", "translate(" + originX + ",499)")
+            .attr("transform", "translate(" + origin.x + "," + origin.y + ") scale(" + origin.scale + ")")
             .attr("opacity", 0)
             .transition()
-            .duration(0.3*transtitionTime)
-            .ease(d3.easeLinear)
-            .attr("transform", "translate(" + (originX + (targetX-originX)/3) + ",499)")
+            .duration(0.2*transtitionTime)
             .attr("opacity", 1)
             .transition()
             .duration(0.6*transtitionTime)
-            .ease(d3.easeLinear)
-            .attr("transform", "translate(" + targetX + ",499)")
+            .attr("transform", "translate(" + target.x + "," + target.y + ") scale(" + target.scale + ")")
+            .transition()
+            .duration(0.2*transtitionTime)            
             .attr("opacity", 0);             
     }   
     
