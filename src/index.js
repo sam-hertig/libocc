@@ -1,33 +1,31 @@
 import * as d3 from "d3";
 
-// API
-const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-
-// Debug (mock API and generate dummy data)
-const debugMode = true;
-
+const url = "http://iz-websrv01.ethz.ch:3000/api/visitors"; // API
+const debugMode = true; // mock API and generate dummy data
+const nrOfPeoplePerDesk = 5;
 let timer;
 
 // Main function
 const update = () => {
 
     const processData = data => {
+        console.log(data);
+        refreshTimestamp(data.ts);
         refreshFloorOccupancy("sittingPeopleG", data.G, data.G_max);
         refreshFloorOccupancy("sittingPeopleH", data.H, data.H_max);
         refreshFloorOccupancy("sittingPeopleJ", data.J, data.J_max);
-        refreshTimestamp(data.ts);
-        visualizeTrend(data.trend)        
+        visualizeTrend(data.trend);
+        libIsClosed(data.library_is_closed);
+        // !data.no_data) 
     }
 
     if (!debugMode) {
         fetch(url)
             .then(response => response.json())
             .then(data => {
-                // if (data.library_is_closed) {
-                // else if (!data.no_data) {
                 processData(data);
             }).catch(e => {
-                console.log("Couldn't fetch library data from server;", e);
+                console.log("Couldn't fetch library data from server |", e);
             });        
     } else {
         const data = {
@@ -35,7 +33,8 @@ const update = () => {
             H_max: 68,
             J_max: 40,
             trend: Math.round((Math.random()*2)-1),
-            ts: new Date().toString()
+            ts: new Date().toString(),
+            library_is_closed: Math.random() > 0.5
         }
         data.G = Math.round(Math.random()*data.G_max);
         data.H = Math.round(Math.random()*data.H_max);
@@ -45,15 +44,41 @@ const update = () => {
 
 }
 
-const visualizeTrend = trend => {
-
+const libIsClosed = closed => {
     d3
-        .selectAll("#walkingPeople")
-        .attr("opacity", 0); 
+        .selectAll("#closed-icon")
+        .attr("opacity", closed ? 1 : 0);
+    if (closed) {
+        if (timer) {
+            timer.stop();
+        }     
+        d3
+            .selectAll("#walkingPerson")
+            .interrupt()            
+            .attr("opacity", 0);
+        d3
+            .selectAll("#ts > *")
+            .text("closed")
+            .attr("dx", -5);            
+    } else {
+        d3
+            .selectAll("#ts > *")
+            .attr("dx", 0);         
+    }
+};
+
+
+
+
+const visualizeTrend = trend => {
 
     if (timer) {
         timer.stop();
     }
+
+    d3
+        .selectAll("#walkingPerson")
+        .attr("opacity", 0);     
 
     if (trend === 0) {
         return;
@@ -63,19 +88,25 @@ const visualizeTrend = trend => {
     const originY = trend === 1 ? 615 : 470; 
     const transtitionTime = 5000;
 
-    const movePerson = () => {
+    const move = () => {
         d3
-            .selectAll("#walkingPeople")
+            .selectAll("#walkingPerson")
             .attr("transform", "translate(73," + originY + ")")
+            .attr("opacity", 0)
+            .transition()
+            .duration(0.3*transtitionTime)
+            .ease(d3.easeLinear)
+            .attr("transform", "translate(73," + (originY + (targetY-originY)/3) + ")")
             .attr("opacity", 1)
             .transition()
-            .duration(transtitionTime-100)
+            .duration(0.6*transtitionTime)
+            .ease(d3.easeLinear)
             .attr("transform", "translate(73," + targetY + ")")
-            .attr("opacity", 0);
-    }
+            .attr("opacity", 0);             
+    }   
     
-    movePerson();
-    timer = d3.interval(movePerson, transtitionTime);
+    move();
+    timer = d3.interval(move, transtitionTime);
 }
 
 
@@ -84,14 +115,13 @@ const refreshTimestamp = (ts) => {
     const formatTime = d3.timeFormat("%H:%M");
     const timeStamp = formatTime(new Date(ts));
     d3
-        .selectAll("#ts")
+        .selectAll("#ts > *")
         .text(timeStamp)
         .on("click", () => update());
 };
 
 // Refresh occupancy for a single floor
 const refreshFloorOccupancy = (id, count, count_max) => {
-    const nrOfPeoplePerDesk = 5;
     const maxCount = Math.round(count_max/nrOfPeoplePerDesk);
     const curCount = Math.round(count/nrOfPeoplePerDesk);
     const data = [];
