@@ -67,6 +67,7 @@ const update = () => {
         data.G = Math.round(Math.random()*data.G_max);
         data.H = Math.round(Math.random()*data.H_max);
         data.J = Math.round(Math.random()*data.J_max); 
+        data.no_data = Math.random() > 0.7 && !data.library_is_closed;
         processData(data);       
     }
 
