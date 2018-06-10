@@ -46,7 +46,7 @@ const update = () => {
 
 const libIsClosed = closed => {
     d3
-        .selectAll("#closed-icon")
+        .selectAll("#closed > #icon")
         .attr("opacity", closed ? 1 : 0);
     if (closed) {
         if (timer) {
@@ -84,24 +84,24 @@ const visualizeTrend = trend => {
         return;
     }
 
-    const targetY = trend === 1 ? 470 : 615; 
-    const originY = trend === 1 ? 615 : 470; 
-    const transtitionTime = 5000;
+    const targetX = trend === 1 ? 150 : 24; 
+    const originX = trend === 1 ? 24 : 150; 
+    const transtitionTime = 4000;
 
     const move = () => {
         d3
             .selectAll("#walkingPerson")
-            .attr("transform", "translate(73," + originY + ")")
+            .attr("transform", "translate(" + originX + ",499)")
             .attr("opacity", 0)
             .transition()
             .duration(0.3*transtitionTime)
             .ease(d3.easeLinear)
-            .attr("transform", "translate(73," + (originY + (targetY-originY)/3) + ")")
+            .attr("transform", "translate(" + (originX + (targetX-originX)/3) + ",499)")
             .attr("opacity", 1)
             .transition()
             .duration(0.6*transtitionTime)
             .ease(d3.easeLinear)
-            .attr("transform", "translate(73," + targetY + ")")
+            .attr("transform", "translate(" + targetX + ",499)")
             .attr("opacity", 0);             
     }   
     
@@ -133,7 +133,7 @@ const refreshFloorOccupancy = (id, count, count_max) => {
     d3
         .selectAll("#" + id + " > g")
         .data(data)
-        .attr("opacity", d => d.occ ? 1 : 0.1)
+        .attr("opacity", d => d.occ ? 1 : 0)
 }
 
 // Initialize and then update every minute
