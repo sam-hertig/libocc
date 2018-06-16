@@ -32,11 +32,40 @@
 			c-10.571-11.46-19.22-14.47-19.219-6.689s4.377,26.128,9.727,40.772l117.552,321.781c5.35,14.644,22.482,26.625,38.073,26.625
 			h896.274c15.591,0,28.347-12.756,28.347-28.347V671.957c0-15.591-12.756-28.347-28.347-28.347H397.878z"/>
 	</g>
-	<rect x="66.859" y="458.471" fill="#B6A3BD" width="165.667" height="28.867"/>
-	<rect x="66.859" y="421.865" fill="#A3B2D1" width="165.667" height="28.865"/>
-	<polygon fill="#B7B7B8" points="149.693,360.142 232.526,414.123 66.859,414.123 	"/>
-	<rect x="161.941" y="495.081" fill="#D4BDC0" width="70.585" height="28.866"/>
-	<rect x="66.859" y="495.081" fill="#D4BDC0" width="70.585" height="28.866"/>
+	<g>
+		<polygon fill="#FFFFFF" points="23.833,397.501 189.5,397.501 232.526,415.124 232.526,523.947 66.859,523.947 23.506,505.232 		
+			"/>
+		<rect x="66.859" y="458.471" fill="#B6A3BD" width="165.667" height="28.867"/>
+		<rect x="66.859" y="421.865" fill="#A3B2D1" width="165.667" height="28.865"/>
+		<rect x="161.941" y="495.081" fill="#D4BDC0" width="70.585" height="28.866"/>
+		<rect x="66.859" y="495.081" fill="#D4BDC0" width="70.585" height="28.866"/>
+		<polygon fill="#D0D2D3" points="23.833,397.501 189.5,397.501 232.526,415.124 66.859,415.124 		"/>
+		<polygon fill="#D0D2D3" points="23.506,505.232 23.505,404.311 61.526,420.933 61.526,521.854 		"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="66.859" y1="430.264" x2="232.6" y2="430.264"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="66.859" y1="441.326" x2="232.6" y2="441.326"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="66.859" y1="467.374" x2="232.6" y2="467.374"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="66.859" y1="478.436" x2="232.6" y2="478.436"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="66.859" y1="503.983" x2="232.6" y2="503.983"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-miterlimit="10" x1="66.859" y1="515.044" x2="232.6" y2="515.044"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="1.9212" stroke-miterlimit="10" x1="89.434" y1="421.865" x2="89.434" y2="524.213"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="1.9212" stroke-miterlimit="10" x1="113.69" y1="421.865" x2="113.69" y2="524.213"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="1.9212" stroke-miterlimit="10" x1="186.461" y1="421.865" x2="186.461" y2="524.213"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="1.5422" stroke-miterlimit="10" x1="137.947" y1="421.865" x2="137.947" y2="487.821"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="1.5422" stroke-miterlimit="10" x1="162.205" y1="421.865" x2="162.205" y2="487.821"/>
+		
+			<line opacity="0.5" fill="none" stroke="#FFFFFF" stroke-width="1.9212" stroke-miterlimit="10" x1="210.718" y1="421.865" x2="210.718" y2="524.213"/>
+	</g>
 </g>
 <g id="walkingPeople">
 	<g id="walkingPerson" ns:extraneous="self" opacity="0">
@@ -702,10 +731,9 @@
 	<path fill="none" stroke="#929497" stroke-width="3" stroke-miterlimit="10" d="M1124.666,93.328"/>
 </g>
 <g id="closed">
-	<path id="icon" opacity="0" fill="#231F20" d="M149.692,461.778c-26.322,0-47.736,21.414-47.736,47.736
-		s21.414,47.736,47.736,47.736s47.736-21.414,47.736-47.736S176.014,461.778,149.692,461.778z M114.858,509.514
-		c0-19.208,15.627-34.834,34.834-34.834c7.278,0,14.039,2.247,19.633,6.079l-48.39,48.389
-		C117.104,523.552,114.858,516.791,114.858,509.514z M149.692,544.348c-7.278,0-14.039-2.247-19.633-6.079l48.39-48.389
-		c3.832,5.595,6.078,12.355,6.078,19.633C184.527,528.721,168.9,544.348,149.692,544.348z"/>
+	<g id="icon" opacity="0">
+		<circle fill="#EC1C24" cx="149.693" cy="509.514" r="24.974"/>
+		<rect x="129.079" y="504.361" fill="#F5F5F5" width="41.228" height="10.306"/>
+	</g>
 </g>
 </svg>
