@@ -1,0 +1,4 @@
+<text transform="matrix(1 0 0 1 1141 145)" fill="#808080" font-size="36" dy="0.35em"></text>
+
+delete "00:00"
+delete font-family="'HelveticaNeue-Light'" everywhere

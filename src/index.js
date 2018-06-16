@@ -6,7 +6,8 @@ const nrOfIcons = {
 	sittingPeopleH: 14,
 	sittingPeopleJ: 8
 };
-let timer;
+let trendTimer;
+let updateTimer;
 
 
 const putText = (text, color="#808080", size=36) => {
@@ -51,16 +52,16 @@ const processData = data => {
 
 
 const update = () => {
-
-    putText("updating...", "#EC1C24", 22);
-
-    if (!debugMode) {
+   	if (!debugMode) {
+    	updateTimer = setTimeout(() => putText("updating...", "#808080", 22), 2000);
         fetch(url)
             .then(response => response.json())
             .then(data => {
+            	clearTimeout(updateTimer);
                 processData(data);
             }).catch(e => {
-                putText("no data", "#EC1C24", 30);
+				clearTimeout(updateTimer);            	
+                putText("no data", "#808080", 30);
                 console.log("Couldn't fetch library data from server |", e);
             });        
     } else {
@@ -82,8 +83,8 @@ const update = () => {
 
 
 const visualizeTrend = trend => {
-    if (timer) {
-        timer.stop();
+    if (trendTimer) {
+        trendTimer.stop();
     }
     d3
         .selectAll("#walkingPerson")
@@ -119,7 +120,7 @@ const visualizeTrend = trend => {
             .attr("opacity", 0);             
     }   
     move();
-    timer = d3.interval(move, transtitionTime);
+    trendTimer = d3.interval(move, transtitionTime);
 }
 
 
@@ -152,8 +153,4 @@ d3.interval(update, 60000);
 
 
 console.log("Interactive visualization by Sam Hertig ––– www.samhertig.com");
-// <text transform="matrix(1 0 0 1 1141 145)" fill="#808080" font-family="'HelveticaNeue-Light'" font-size="36" dy="0.35em"></text>
-
-
-
 
