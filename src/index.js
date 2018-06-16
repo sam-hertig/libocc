@@ -1,5 +1,4 @@
 import * as d3 from "d3";
-
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
 const debugMode = false;
 const nrOfIcons = {
@@ -10,14 +9,12 @@ const nrOfIcons = {
 let timer;
 
 
-// <text transform="matrix(1 0 0 1 1141 145)" fill="#808080" font-family="'HelveticaNeue-Light'" font-size="36" dy="0.35em"></text>
 const putText = (text, color="#808080", size=36) => {
     d3
         .selectAll("#ts > *")
         .text(text)
         .attr("font-size", size)
-        .attr("fill", color)
-        .on("click", () => update());
+        .attr("fill", color);
 }
 
 
@@ -143,13 +140,19 @@ const refreshFloorOccupancy = (id, count, count_max) => {
 }
 
 
+const enableRefresh = () => {
+    d3
+        .selectAll("#text-ts")
+        .on("click", update);
+}
+
+enableRefresh();
 update();
 d3.interval(update, 60000);
 
 
 console.log("Interactive visualization by Sam Hertig ––– www.samhertig.com");
-
-
+// <text transform="matrix(1 0 0 1 1141 145)" fill="#808080" font-family="'HelveticaNeue-Light'" font-size="36" dy="0.35em"></text>
 
 
 
