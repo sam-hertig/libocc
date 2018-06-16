@@ -6,6 +6,7 @@ const nrOfIcons = {
 	sittingPeopleH: 14,
 	sittingPeopleJ: 8
 };
+let lastData;
 let trendTimer;
 let updateTimer;
 
@@ -59,10 +60,16 @@ const update = () => {
             .then(data => {
             	clearTimeout(updateTimer);
                 processData(data);
+                lastData = data;
             }).catch(e => {
-				clearTimeout(updateTimer);            	
-                putText("no data", "#808080", 30);
-                console.log("Couldn't fetch library data from server |", e);
+                clearTimeout(updateTimer);
+                console.log("Couldn't fetch library data from server |", e);                
+                if (lastData) {
+                    // lastData.ts = new Date().toString(); // vorgaukeln
+                    processData(lastData);
+                } else {
+                    putText("no data", "#808080", 30);    
+                }
             });        
     } else {
         const data = {
