@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-const debugMode = false;
+const debugMode = true;
 const nrOfIcons = {
 	sittingPeopleG: 14,
 	sittingPeopleH: 14,
@@ -156,7 +156,7 @@ const enableRefresh = () => {
 
 enableRefresh();
 update();
-setInterval(update, 60000);
+setInterval(update, debugMode ? 6000 : 60000);
 
 
 console.log("Interactive visualization by Sam Hertig ––– www.samhertig.com");

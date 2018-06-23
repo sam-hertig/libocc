@@ -59,7 +59,7 @@ const update = () => {
             J_max: 40,
             trend: Math.round((Math.random()*2)-1),
             ts: new Date().toString(),
-            library_is_closed: Math.random() > 0.99
+            library_is_closed: Math.random() > 0.9
         }
         data.G = Math.round(Math.random()*data.G_max);
         data.H = Math.round(Math.random()*data.H_max);
@@ -70,4 +70,4 @@ const update = () => {
 }
 
 update();
-setInterval(update, debugMode ? 3000 : 60000);
+setInterval(update, debugMode ? 6000 : 60000);
