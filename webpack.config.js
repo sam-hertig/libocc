@@ -1,6 +1,6 @@
 module.exports = {
   entry: [
-    './src/index.js'
+    './src/detail.js'
   ],
   module: {
     rules: [
@@ -17,7 +17,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'detail.js'
   },
   devServer: {
     contentBase: './dist'

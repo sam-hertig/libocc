@@ -63,10 +63,10 @@ const update = () => {
                 lastData = data;
             }).catch(e => {
                 clearTimeout(updateTimer);
-                console.log("Couldn't fetch library data from server |", e);                
+                processData(lastData);
+                console.log("Couldn't fetch library occupancy data from server |", e);                
                 if (lastData) {
                     // lastData.ts = new Date().toString(); // vorgaukeln
-                    processData(lastData);
                 } else {
                     putText("no data", "#808080", 30);    
                 }
@@ -156,7 +156,7 @@ const enableRefresh = () => {
 
 enableRefresh();
 update();
-d3.interval(update, 60000);
+setInterval(update, 60000);
 
 
 console.log("Interactive visualization by Sam Hertig ––– www.samhertig.com");

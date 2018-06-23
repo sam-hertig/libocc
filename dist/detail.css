@@ -1,5 +1,13 @@
-#viz {
-    font-family: Arial, Helvetica, sans-serif;    
+body {
+    background-color: #e9e6e5;
+    font-family: Arial, Helvetica, sans-serif;  
+}
+
+#background polygon:nth-child(1) {
+    opacity: 0;
+}
+
+#viz {  
     max-width: 600px;
 }
 
@@ -27,6 +35,14 @@
 
 #ts > * {
     text-anchor: middle;
+}
+
+#background line {
+    stroke: #e9e6e5; /* should be the same as background color of svg */
+}
+
+#desks polygon {
+    fill: #888888;
 }
 
 #background g:nth-child(4) rect:nth-child(2) { 

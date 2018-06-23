@@ -1,0 +1,60 @@
+body {
+	background-color: #e9e6e5;
+	font-family: Arial, Helvetica, sans-serif;  	
+}
+
+.occupancy {
+	width: 800px;
+	display: none;
+	align-items: baseline;
+}
+
+.occupancy a {
+	text-decoration: none;
+	color: #000000;
+}
+
+.occupancy a:hover {
+	text-decoration: underline;
+}
+
+.occupancy > div {
+	margin: 0 3px;
+}
+
+.occupancy > div.new-section {
+	margin-left: 20px;
+}
+
+.occupancy .bar {
+	width: 180px;
+	height: 10px;
+	background-color: #FFFFFF;  /*rgba(242, 201, 12, 0.3)*/
+	border: 1px solid #000000;	
+	border-radius: 4px;
+    padding-right: 2px;
+}
+
+.occupancy .bar .bar-filled {
+	width: 0%;
+	height: calc(100% - 4px);
+	background-color: #006ab3;
+	margin: 2px;
+	border-radius: 2px;
+    transition: width 2s;
+}
+
+.occupancy .trend {
+	transform: rotate(180deg);
+	color: #006ab3;
+	transition: transform 2s;
+	-webkit-transform: translate3d(0, 0, 0);
+	-moz-transform: translate3d(0, 0, 0);
+	transform: translate3d(0, 0, 0);
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
