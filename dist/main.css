@@ -28,3 +28,32 @@
 #ts > * {
     text-anchor: middle;
 }
+
+#background g:nth-child(4) rect:nth-child(2) { 
+    fill: #f2c90c;
+}
+
+#background g:nth-child(4) rect:nth-child(3) { 
+    fill: #006ab3;
+}
+
+#background g:nth-child(4) rect:nth-child(4),
+#background g:nth-child(4) rect:nth-child(5) { 
+    fill: #998071;
+}
+
+#background #SVGID_1_ stop:nth-child(2) {
+    stop-color: #006ab3 !important;
+    stop-opacity: 0.2 !important;
+}
+
+#background #SVGID_2_ stop:nth-child(2) {
+    stop-color: #f2c90c !important;
+    stop-opacity: 0.2 !important;
+}
+
+#background #SVGID_3_ stop:nth-child(2) {
+    stop-color: #998071 !important;
+    stop-opacity: 0.3 !important;
+}
+
