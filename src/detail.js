@@ -5,7 +5,7 @@ import { interval } from "d3-timer";
 import { interrupt, transition } from "d3-transition";
 
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-const debugMode = false;
+const debugMode = false; // if true, no backend-call is performed, and only fake data is generated (-> set to false for production!)
 const nrOfIcons = {
 	sittingPeopleG: 14,
 	sittingPeopleH: 14,

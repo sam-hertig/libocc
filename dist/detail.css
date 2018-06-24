@@ -1,7 +1,7 @@
 /* 
-    - These rules should be modified accordingly when embedding in a page on http://www.infozentrum.ethz.ch/???
-    - The body styles can most likely just be dropped
-    - Tweak the width of the container "#viz" to set the size of the visualization
+    - These rules should be modified accordingly when embedding in a page on http://www.infozentrum.ethz.ch/???.html
+    - The body styles can most likely just be omitted
+    - Tweak the width of the container "#viz" to set the size of the visualization (can be responsive)
 */
 
 
