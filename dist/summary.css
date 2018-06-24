@@ -10,13 +10,13 @@ body {
 }
 
 .occupancy {
-	display: none;
-	align-items: baseline;
+	display: none;  /* dynamically set to "flex" by javascript */
+	align-items: center;
 }
 
 /* 
     - Required for proper styling of the loading bar, trend arrow, etc...
-    - Should ideally not be deleted, but could be extended
+    - Should not be deleted, but could be extended (e.g. by color modifiers)
 */
 
 .occupancy a {
@@ -55,27 +55,19 @@ body {
 }
 
 .occupancy .trend {
-	transform: rotate(180deg);
-	color: #006ab3;
+    position: relative;
+	height: 18px;
+	width: 18px;
+}
+
+.occupancy .svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.occupancy .trend .arrow {
+	transform-origin: 12px 12px;
 	transition: transform 2s;
-	-webkit-transform:translateZ();
-	-moz-transform:translateZ();
-	-ms-transform:translateZ();
-	-o-transform:translateZ();
-	transform:translateZ();
-	-webkit-transform: translate3d(0, 0, 0);
-	-moz-transform: translate3d(0, 0, 0);
-	-ms-transform: translate3d(0, 0, 0);
-	-o-transform: translate3d(0, 0, 0);	
-	transform: translate3d(0, 0, 0);
-    -webkit-transform-style: preserve-3d;
-    -moz-transform-style: preserve-3d;
-    -ms-transform-style: preserve-3d;
-    -o-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    -webkit-backface-visibility: hidden;
-    -moz-backface-visibility: hidden;
-    -ms-backface-visibility: hidden;
-    -o-backface-visibility: hidden;
-    backface-visibility: hidden;
 }

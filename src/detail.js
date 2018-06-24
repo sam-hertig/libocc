@@ -156,7 +156,7 @@ const enableRefresh = () => {
 
 enableRefresh();
 update();
-setInterval(update, debugMode ? 10000 : 60000);
+setInterval(update, debugMode ? 12000 : 60000);
 
 
 console.log("Interactive visualization by Sam Hertig ––– www.samhertig.com");

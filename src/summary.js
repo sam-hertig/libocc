@@ -7,13 +7,13 @@ let lastData;
 const updateTrend = trend => {
 	let rot;
 	if (trend === 1) {
-		rot = "135deg";
+		rot = "45deg";
 	} else if (trend === -1) {
-		rot = "225deg";
+		rot = "-45deg";
 	} else {
-		rot = "180deg";
+		rot = "0deg";
 	}
-	document.querySelector(".occupancy .trend").style.transform = "rotate(" + rot + ")";
+	document.querySelector(".occupancy .trend .arrow").style.transform = "rotate(" + rot + ")";
 }
 
 const updateBar = data => {
@@ -73,4 +73,4 @@ const update = () => {
 }
 
 update();
-setInterval(update, debugMode ? 3000 : 60000);
+setInterval(update, debugMode ? 4000 : 60000);
