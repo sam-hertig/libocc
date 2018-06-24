@@ -1,6 +1,8 @@
 import * as d3 from "d3";
+import * as axios from "axios";
+
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-const debugMode = true;
+const debugMode = false;
 const nrOfIcons = {
 	sittingPeopleG: 14,
 	sittingPeopleH: 14,
@@ -37,7 +39,7 @@ const annotate = (closed, ts) => {
 
 
 const processData = data => {
-    console.log(data);
+    console.log("Data:", data);
     if (data.library_is_closed) {
     	data.G = 0;
 		data.H = 0;
@@ -55,12 +57,11 @@ const processData = data => {
 const update = () => {
    	if (!debugMode) {
     	updateTimer = setTimeout(() => putText("updating...", "#808080", 22), 2000);
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
+        axios.get(url)
+            .then(response => {
             	clearTimeout(updateTimer);
-                processData(data);
-                lastData = data;
+                processData(response.data);
+                lastData = response.data;
             }).catch(e => {
                 clearTimeout(updateTimer);
                 processData(lastData);
@@ -76,15 +77,17 @@ const update = () => {
             G_max: 68,
             H_max: 68,
             J_max: 40,
+            overall_max: 176,
             trend: Math.round((Math.random()*2)-1),
             ts: new Date().toString(),
-            library_is_closed: Math.random() > 0.7
+            library_is_closed: Math.random() > 0.9
         }
         data.G = Math.round(Math.random()*data.G_max);
         data.H = Math.round(Math.random()*data.H_max);
-        data.J = Math.round(Math.random()*data.J_max); 
+        data.J = Math.round(Math.random()*data.J_max);
+        data.overall = Math.round(Math.random()*data.overall_max);
         data.no_data = Math.random() > 0.7 && !data.library_is_closed;
-        processData(data);       
+        processData(data);      
     }
 }
 
