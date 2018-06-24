@@ -1,7 +1,7 @@
-import * as axios from "axios";
+import { get } from "axios";
 
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-const debugMode = false;
+const debugMode = true;
 let lastData;
 
 const updateTrend = trend => {
@@ -43,7 +43,7 @@ const processData = data => {
 
 const update = () => {
    	if (!debugMode) {
-        axios.get(url)
+        get(url)
             .then(response => {
                 processData(response.data);
                 lastData = response.data;
@@ -73,4 +73,4 @@ const update = () => {
 }
 
 update();
-setInterval(update, debugMode ? 6000 : 60000);
+setInterval(update, debugMode ? 3000 : 60000);

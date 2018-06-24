@@ -1,8 +1,8 @@
-import * as d3 from "d3";
-import * as axios from "axios";
+import { selectAll, timeFormat, interval } from "d3";
+import { get } from "axios";
 
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-const debugMode = false;
+const debugMode = true;
 const nrOfIcons = {
 	sittingPeopleG: 14,
 	sittingPeopleH: 14,
@@ -14,8 +14,7 @@ let updateTimer;
 
 
 const putText = (text, color="#808080", size=36) => {
-    d3
-        .selectAll("#ts > *")
+    selectAll("#ts > *")
         .text(text)
         .attr("font-size", size)
         .attr("fill", color);
@@ -23,15 +22,14 @@ const putText = (text, color="#808080", size=36) => {
 
 
 const annotate = (closed, ts) => {
-    d3
-        .selectAll("#closed > #icon")
+    selectAll("#closed > #icon")
         .attr("opacity", closed ? 1 : 0);
     let text, color;
     if (closed) {
     	color = "#EC1C24";
 		text = "closed";
     } else {
-        const formatTime = d3.timeFormat("%H:%M");
+        const formatTime = timeFormat("%H:%M");
     	text = formatTime(new Date(ts));
     }
     putText(text, color);
@@ -57,7 +55,7 @@ const processData = data => {
 const update = () => {
    	if (!debugMode) {
     	updateTimer = setTimeout(() => putText("updating...", "#808080", 22), 2000);
-        axios.get(url)
+        get(url)
             .then(response => {
             	clearTimeout(updateTimer);
                 processData(response.data);
@@ -96,8 +94,7 @@ const visualizeTrend = trend => {
     if (trendTimer) {
         trendTimer.stop();
     }
-    d3
-        .selectAll("#walkingPerson")
+    selectAll("#walkingPerson")
         .interrupt()  
         .attr("opacity", 0);     
     if (trend === 0) {
@@ -115,8 +112,7 @@ const visualizeTrend = trend => {
     };
     const transtitionTime = 4000;
     const move = () => {
-        d3
-            .selectAll("#walkingPerson")
+        selectAll("#walkingPerson")
             .attr("transform", "translate(" + origin.x + "," + origin.y + ") scale(" + origin.scale + ")")
             .attr("opacity", 0)
             .transition()
@@ -130,7 +126,7 @@ const visualizeTrend = trend => {
             .attr("opacity", 0);             
     }   
     move();
-    trendTimer = d3.interval(move, transtitionTime);
+    trendTimer = interval(move, transtitionTime);
 }
 
 
@@ -144,22 +140,20 @@ const refreshFloorOccupancy = (id, count, count_max) => {
             occ: i < curCount
         });
     }
-    d3
-        .selectAll("#" + id + " > g")
+    selectAll("#" + id + " > g")
         .data(data)
         .attr("opacity", d => d.occ ? 1 : 0)
 }
 
 
 const enableRefresh = () => {
-    d3
-        .selectAll("#text-ts")
+    selectAll("#text-ts")
         .on("click", update);
 }
 
 enableRefresh();
 update();
-setInterval(update, debugMode ? 6000 : 60000);
+setInterval(update, debugMode ? 10000 : 60000);
 
 
 console.log("Interactive visualization by Sam Hertig ––– www.samhertig.com");
