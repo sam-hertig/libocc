@@ -1,7 +1,8 @@
 module.exports = {
-  entry: [
-    './src/detail.js'
-  ],
+  entry: {
+    detail: './src/detail.js',
+    summary: './src/summary.js'
+  },
   module: {
     rules: [
       {
@@ -17,7 +18,7 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: 'detail.js'
+    filename: '[name].js'
   },
   devServer: {
     contentBase: './dist'

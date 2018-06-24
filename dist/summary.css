@@ -1,3 +1,9 @@
+/* 
+    These rules should be modified accordingly when embedding in a page on http://www.infozentrum.ethz.ch 
+    The body styles can most likely just be dropped
+    Tweak the width of the container ".occupancy" to set the width of the summary line
+*/
+
 body {
 	background-color: #e9e6e5;
 	font-family: Arial, Helvetica, sans-serif;  	
@@ -8,6 +14,11 @@ body {
 	display: none;
 	align-items: baseline;
 }
+
+/* 
+    Required for proper styling of the loading bar, trend arrow, etc...
+    Should ideally not be deleted, but could be extended
+*/
 
 .occupancy a {
 	text-decoration: none;

@@ -4,10 +4,12 @@
         <meta charset="utf-8">
         <title>D-CHAB library occupancy entry page</title>
         <meta name="description" content="D-CHAB library occupancy">
-        <meta name="author" content="Sam Hertig">        
+        <meta name="author" content="Sam Hertig">
+        <!-- Include the stylesheet for the summary line for www.infozentrum.ethz.ch-->         
         <link rel="stylesheet" type="text/css" href="summary.css">
     </head>
     <body>
+        <!-- The following div should be placed somewhere on www.infozentrum.ethz.ch -->
         <div class="occupancy">
             <div class="bar-text">
                 Occupancy:
@@ -22,12 +24,13 @@
                 Trend:
             </div>
             <div class="trend">
-                &#11013; <!-- &#11013; -->
+                &#11013;
             </div>
             <div class="detail-link new-section">
-                <a href="/detail.html">> Overview</a>
+                <a href="./detail.html">See details</a>
             </div>
         </div>
+        <!-- Include the javascript for the summary line such that it is loaded for www.infozentrum.ethz.ch--> 
         <script type="text/javascript" src="summary.js"></script>
     </body>
 </html>

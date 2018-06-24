@@ -68,7 +68,7 @@ const update = () => {
                 if (lastData) {
                     // lastData.ts = new Date().toString(); // vorgaukeln
                 } else {
-                    putText("no data", "#808080", 30);    
+                    putText("no data", "#808080", 30);   
                 }
             });        
     } else {
