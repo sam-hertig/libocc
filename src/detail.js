@@ -1,8 +1,11 @@
-import { selectAll, timeFormat, interval } from "d3";
 import { get } from "axios";
+import { selectAll } from "d3-selection";
+import { timeFormat } from "d3-time-format";
+import { interval } from "d3-timer";
+import { interrupt, transition } from "d3-transition";
 
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-const debugMode = true;
+const debugMode = false;
 const nrOfIcons = {
 	sittingPeopleG: 14,
 	sittingPeopleH: 14,

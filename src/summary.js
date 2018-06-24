@@ -1,7 +1,7 @@
 import { get } from "axios";
 
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-const debugMode = true;
+const debugMode = false;
 let lastData;
 
 const updateTrend = trend => {

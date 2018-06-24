@@ -1,7 +1,7 @@
 /* 
-    These rules should be modified accordingly when embedding in a page on http://www.infozentrum.ethz.ch 
-    The body styles can most likely just be dropped
-    Tweak the width of the container ".occupancy" to set the width of the summary line
+    - These rules should be modified accordingly when embedding in a page on http://www.infozentrum.ethz.ch 
+    - The body styles can most likely just be dropped
+    - The container is hidden by defaults and it's "display"-value is set to "flex" once the data is fetched
 */
 
 body {
@@ -10,14 +10,13 @@ body {
 }
 
 .occupancy {
-	width: 800px;
 	display: none;
 	align-items: baseline;
 }
 
 /* 
-    Required for proper styling of the loading bar, trend arrow, etc...
-    Should ideally not be deleted, but could be extended
+    - Required for proper styling of the loading bar, trend arrow, etc...
+    - Should ideally not be deleted, but could be extended
 */
 
 .occupancy a {
@@ -59,13 +58,24 @@ body {
 	transform: rotate(180deg);
 	color: #006ab3;
 	transition: transform 2s;
+	-webkit-transform:translateZ();
+	-moz-transform:translateZ();
+	-ms-transform:translateZ();
+	-o-transform:translateZ();
+	transform:translateZ();
 	-webkit-transform: translate3d(0, 0, 0);
 	-moz-transform: translate3d(0, 0, 0);
+	-ms-transform: translate3d(0, 0, 0);
+	-o-transform: translate3d(0, 0, 0);	
 	transform: translate3d(0, 0, 0);
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
     transform-style: preserve-3d;
     -webkit-backface-visibility: hidden;
     -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
     backface-visibility: hidden;
 }

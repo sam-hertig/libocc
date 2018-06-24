@@ -1,7 +1,7 @@
 /* 
-    These rules should be modified accordingly when embedding in a page on http://www.infozentrum.ethz.ch 
-    The body styles can most likely just be dropped
-    Tweak the width of the container "#viz" to set the size of the visualization
+    - These rules should be modified accordingly when embedding in a page on http://www.infozentrum.ethz.ch/???
+    - The body styles can most likely just be dropped
+    - Tweak the width of the container "#viz" to set the size of the visualization
 */
 
 
@@ -16,8 +16,8 @@ body {
 
 
 /* 
-    Required for proper styling and responsiveness of SVG
-    Should ideally not be modified
+    - Required for proper styling and responsiveness of SVG
+    - Should ideally not be modified
 */
 
 .svg-container {
@@ -49,9 +49,9 @@ body {
 
 
 /*
-    The rules below change the color of the SVG
-    I tried to use colors already in use on http://www.infozentrum.ethz.ch
-    Modify at your own risk
+    - The rules below change the color of the SVG
+    - Currently using colors already present on http://www.infozentrum.ethz.ch
+    - Modify at your own risk
 */
 
 #background polygon:nth-child(1) {

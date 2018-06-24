@@ -1,5 +1,5 @@
 {
-  "name": "project",
+  "name": "",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,8 +8,8 @@
     "build": "webpack --mode production"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Samuel Hertig",
+  "license": "",
   "babel": {
     "presets": [
       "env",
@@ -21,12 +21,12 @@
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.7.0",
     "babel-preset-stage-2": "^6.24.1",
-    "webpack": "^4.10.2",
+    "webpack": "^4.12.1",
     "webpack-cli": "^2.0.0",
     "webpack-dev-server": "^3.1.4"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "d3": "^5.4.0"
+    "d3": "^5.5.0"
   }
 }
