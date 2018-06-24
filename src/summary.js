@@ -7,9 +7,9 @@ let lastData;
 const updateTrend = trend => {
 	let rot;
 	if (trend === 1) {
-		rot = "45deg";
-	} else if (trend === -1) {
 		rot = "-45deg";
+	} else if (trend === -1) {
+		rot = "45deg";
 	} else {
 		rot = "0deg";
 	}
