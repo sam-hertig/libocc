@@ -23,6 +23,7 @@ body {
 .svg-container {
     position: relative;
     width: 100%;
+    padding-bottom: 100%;
 }
 
 .svg-content-responsive {
