@@ -1,7 +1,7 @@
 import { get } from "axios";
 
 const url = "http://iz-websrv01.ethz.ch:3000/api/visitors";
-const debugMode = true; // if true, no backend-call is performed, and only fake data is generated (-> set to false for production!)
+const debugMode = false; // if true, no backend-call is performed, and only fake data is generated (-> set to false for production!)
 let lastData;
 
 const updateTrend = trend => {
