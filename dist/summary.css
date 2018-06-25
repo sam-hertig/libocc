@@ -60,14 +60,8 @@ body {
 	width: 18px;
 }
 
-.occupancy .svg-content-responsive {
-    display: inline-block;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
 .occupancy .trend .arrow {
-	transform-origin: 12px 12px;
+	margin-top: -1px;
+	width: 20px;
 	transition: transform 2s;
 }
