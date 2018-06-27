@@ -82,7 +82,7 @@ body {
 
 #background #SVGID_1_ stop:nth-child(2) {
     stop-color: #006ab3 !important;
-    stop-opacity: 0.2 !important;
+    stop-opacity: 0.15 !important;
 }
 
 #background #SVGID_2_ stop:nth-child(2) {
@@ -92,6 +92,6 @@ body {
 
 #background #SVGID_3_ stop:nth-child(2) {
     stop-color: #998071 !important;
-    stop-opacity: 0.3 !important;
+    stop-opacity: 0.15 !important;
 }
 
